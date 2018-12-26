@@ -27,6 +27,12 @@ const Text = styled.div`
   `}
 `
 
+const Edit = styled.div`
+  color: green;
+  cursor: pointer;
+  padding: 15px;
+`
+
 const Delete = styled.div`
   color: red;
   cursor: pointer;
@@ -35,16 +41,17 @@ const Delete = styled.div`
 
 class TodoItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.done !== nextProps.done
+    return this.props.done !== nextProps.done || this.props.children !== nextProps.children
   }
 
   render() {
-    const { done, children, onToggle, onRemove } = this.props
+    const { done, children, onToggle, onRemove, onOpenEditor } = this.props
 
     return (
       <ItemCover onClick={onToggle}>
         <CheckBox checked={done} />
         <Text done={done}>{children}</Text>
+        <Edit onClick={onOpenEditor}>[수정]</Edit>
         <Delete onClick={(e) => { onRemove(); e.stopPropagation() } }>[지우기]</Delete>
       </ItemCover>
     )

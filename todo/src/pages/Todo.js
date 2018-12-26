@@ -79,6 +79,26 @@ class Todo extends Component {
     })
   }
 
+  handleSave = (id, text) => {
+    const { todos } = this.state
+    const index = todos.findIndex(todo => todo.id === id)
+
+    const edited = {
+      ...todos[index],
+      text,
+    }
+
+    this.setState({
+      todos: [
+        ...todos.slice(0, index),
+        edited,
+        ...todos.slice(index + 1, todos.length),
+      ]
+    })
+  }
+
+
+
   render() {
     const { input, todos } = this.state
     const {
@@ -86,13 +106,14 @@ class Todo extends Component {
       handleInsert,
       handleToggle,
       handleRemove,
+      handleSave,
     } = this
 
     return (
       <Container>
         <Title>일정 관리</Title>
         <TodoInput onChange={handleChange} onInsert={handleInsert} value={input} />
-        <TodoList  todos={todos} onToggle={handleToggle} onRemove={handleRemove} />
+        <TodoList  todos={todos} onToggle={handleToggle} onRemove={handleRemove} onSave={handleSave} />
       </Container>
     );
   }
