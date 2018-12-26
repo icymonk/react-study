@@ -14,7 +14,7 @@ const TodoInput = ({ value, onInsert, onChange }) => {
     if(e.key === 'Enter') onInsert()
   }
   
-  return (<Input value={value} onChange={onChange} onKeyPress={handleKeyPress} />)
+  return <Input value={value} onChange={onChange} onKeyPress={handleKeyPress} />
 }
 
 export default TodoInput
