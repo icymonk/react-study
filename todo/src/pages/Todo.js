@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TodoInput from '../components/TodoInput'
 import TodoList from '../containers/TodoList'
-import { Container } from '../styles/main'
+import { Container } from '../styles'
 import styled from 'styled-components'
 
 const Title = styled.div`

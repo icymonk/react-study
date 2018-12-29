@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Flex } from '../styles/main'
+import { Flex, Button } from '../styles'
 
 const ItemCover = styled(Flex)`
   border-top: 1px solid grey;
@@ -9,6 +9,9 @@ const ItemCover = styled(Flex)`
   &:nth-last-child(1) {
     border-bottom: 1px solid grey;
   }
+  ${props => props.done && `
+    background: #ddd;
+  `}
 `
 
 const CheckBox = styled.input.attrs({
@@ -27,16 +30,12 @@ const Text = styled.div`
   `}
 `
 
-const Edit = styled.div`
-  color: green;
-  cursor: pointer;
-  padding: 15px;
+const Edit = styled(Button)`
+  background: green;
 `
 
-const Delete = styled.div`
-  color: red;
-  cursor: pointer;
-  padding: 15px;
+const Delete = styled(Button)`
+  background: red;
 `
 
 class TodoItem extends Component {
@@ -48,10 +47,10 @@ class TodoItem extends Component {
     const { done, children, onToggle, onRemove, onOpenEditor } = this.props
 
     return (
-      <ItemCover onClick={onToggle}>
+      <ItemCover done={done} onClick={onToggle}>
         <CheckBox checked={done} />
         <Text done={done}>{children}</Text>
-        <Edit onClick={onOpenEditor}>[수정]</Edit>
+        <Edit onClick={(e) => { onOpenEditor(); e.stopPropagation() } }>[수정]</Edit>
         <Delete onClick={(e) => { onRemove(); e.stopPropagation() } }>[지우기]</Delete>
       </ItemCover>
     )

@@ -13,7 +13,9 @@ const ItemCover = styled.div`
   left: calc(50% - 75px);
 `
 
-const EditText = styled.input`
+const EditText = styled.input.attrs({
+  autoFocus: true,
+})`
   font-size: 24px;
   margin: 20px;
   width: calc(100% - 40px);
@@ -45,25 +47,36 @@ class TodoItem extends Component {
   state = {
     input: this.props.todo.text
   }
-
+  
   handleChange = (e) => {
     const { value } = e.target
     this.setState({
       input: value,
     })
   }
+
+  
   render() {
     const { todo, onSave, onCancel } = this.props
     const { input } = this.state
     const {
       handleChange,
     } = this
+    
+    const handleSave = () => {
+      onSave(todo.id, input)
+      onCancel()
+    }
+
+    const handleKeyPress = (e) => {
+      if(e.key === 'Enter') handleSave()
+    }
 
     return (
       <ItemCover>
-        <EditText value={input} onChange={handleChange} autoFocus></EditText>
+        <EditText value={input} onChange={handleChange} onKeyPress={handleKeyPress}></EditText>
         <Cancel onClick={onCancel}>취소</Cancel>
-        <Save onClick={() => { onSave(todo.id, input); onCancel() }}>저장</Save>
+        <Save onClick={handleSave}>저장</Save>
       </ItemCover>
     )
   }
