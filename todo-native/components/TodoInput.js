@@ -1,27 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const InputCover = styled.View``
+const InputCover = styled.View`
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+`
 
 const Input = styled.TextInput`
+  flex: 1;
   font-size: 24px;
-  margin: 20px 0;
   border: 1px solid grey;
-  width: 350;
+  border-radius: 100;
+  padding-left: 16px;
 `
-const InputButton = styled.Button``
 
-const TodoInput = ({ input, onInsert, onChange }) => {
-  const handleKeyPress = () => {
-    onInsert()
-  }
-  
-  return (
-    <InputCover>
-      <Input value={input} onChangeText={onChange}/>
-      <InputButton onPress={handleKeyPress} title='추가'></InputButton>
-    </InputCover>
-  )
-}
+const InputButton = styled.Button`
+  flex: 1;
+  font-size: 24px;
+  background-color: grey;
+`
+
+const TodoInput = ({ input, onInsert, onChange }) => (
+  <InputCover>
+    <Input value={input} onChangeText={onChange} placeholder='할 일을 입력해주세요'/>
+    <InputButton onPress={onInsert} title='추가'></InputButton>
+  </InputCover>
+)
 
 export default TodoInput

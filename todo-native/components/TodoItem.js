@@ -14,7 +14,7 @@ const ItemCover = styled.View`
 const Text = styled.Text`
   flex: 1;
   font-size: 24px;
-  line-height: 40px;
+  padding: 4px;
   text-align: center;
   color: ${props => props.done ? 'white' : 'black'}
 `

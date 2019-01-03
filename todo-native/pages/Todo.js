@@ -92,8 +92,10 @@ class Todo extends Component {
 
     return (
       <View style={{ marginTop: 22 }}>
-        <Title>일정 관리</Title>
-        <TodoInput input={input} onChange={handleChange} onInsert={handleInsert} />
+        <View>
+          <Title>일정 관리</Title>
+          <TodoInput input={input} onChange={handleChange} onInsert={handleInsert} />
+        </View>
         <TodoList onToggle={handleToggle} onRemove={handleRemove} todos={todos} />
       </View>
     );
